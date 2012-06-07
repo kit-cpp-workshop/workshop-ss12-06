@@ -62,13 +62,22 @@ void foo(int i)
 
 
 \begin{frame}[fragile]{Incomplete Types}
-	Eine Klasse, die nur deklariert aber nicht definiert wurde, ist ein \emph{incomplete type}.
-	Es dürfen keine »Dinge« mit incomplete type angelegt werden.
-	Es dürfen sehr wohl Referenzen und Pointer auf incomplete types angelegt werden.
+	\begin{block}{Definition: incomplete type}
+		Eine Klasse, die nur deklariert aber nicht definiert wurde, ist ein \emph{incomplete type}.
+	\end{block}
 	
-	Ein Pointer auf einen incomplete type ist modifizierbar, aber nicht dereferenzierbar.
+	\pause
 	
-	Bevor man einen Pointer/Referenz nutzt, sollte der type completed sein (definiert). Sonst darf man quasi nichts mit dem Pointer/Referenz tun. Siehe Standard, 3.2:4, 5.2.2:4, 5.3.1:4, 5.7:1, 8.3.5:6
+	\begin{itemize}
+		\item »Dinge« mit incomplete type anlegen: verboten
+		\item Referenzen und Pointer auf incomplete types: erlaubt
+		\begin{itemize}
+			\item Pointer auf einen incomplete type sind modifizierbar
+			\item \dots aber nicht dereferenzierbar
+		\end{itemize}
+	\end{itemize}
+	
+	\tiny{Standard, 3.2:4, 5.2.2:4, 5.3.1:4, 5.7:1, 8.3.5:6}
 	
 	\begin{lstlisting}
 		struct X;
@@ -83,7 +92,7 @@ void foo(int i)
 \end{frame}
 
 
-\begin{frame}[fragile]{classes, types}
+\begin{frame}[fragile]{Incomplete Types: Beispiel}
 	\begin{block}{Syntax}
 		\begin{columns}[t]
 			\column{0.3\textwidth}
