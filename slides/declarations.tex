@@ -4,10 +4,11 @@
 	\begin{block}{Standard, 3.1}
 		Eine Deklaration führt einen Namen ein (in eine translation unit).
 		Eine Deklaration ist zugleich eine Definition, außer:
-		\begin{itemize}[<+->]
-			\item es ist der Name einer Funktion oder Klasse und es fehlt der Körper {\tiny (das zwischen den geschweiften Klammern) }
-			\item die Deklaration enthält einen linkage-specifier (\verb|static|, \verb|extern|) aber weder einen Körper noch eine Initialisierung
-			\item es ist die Deklaration einer Klassenvariablen
+		\begin{itemize}
+			\item Bei Funktionen/Klassen: Fehlendem Rumpf {\tiny (das zwischen den geschweiften Klammern) }
+			\item Bei Funktionen ohne Rumpf
+			\item bei Variablen mit angegebenem linkage-specifier \verb|extern|
+			\item Bei static member Variablen ohne initialisierung
 		\end{itemize}
 	\end{block}
 	
@@ -15,7 +16,7 @@
 	
 	\uncover<+->
 	{
-		Eine Deklaration sagt: es gibt einen Namen
+		Eine Deklaration sagt: Es gibt einen Namen \\
 		Eine Definition beschreibt, was genau mit dem Namen bezeichnet wird.
 	}
 \end{frame}
@@ -23,10 +24,7 @@
 
 \begin{frame}{Deklaration und Definition: Beispiele}
 	\onslide*<+>
-		\lstinputlisting[commentstyle=\none]{cpp-code/decl-defn.cpp}
-		
-	\onslide*<+>
-		\lstinputlisting{cpp-code/decl-defn.cpp}
+		\lstinputlisting[basicstyle=\tiny]{cpp-code/decl-defn.cpp}
 \end{frame}
 
 
