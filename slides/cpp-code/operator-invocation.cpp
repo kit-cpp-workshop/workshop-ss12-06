@@ -2,7 +2,8 @@ MyClass a;
 -a;    // a.operator- () OR operator- (a)
 ++a;   // a.operator++ () OR operator++ (a)
 a++;   // a.operator++ (0) OR operator++ (a, 0)
-a->m;  // a.operator-> () and then: depends on return type!
+a->m;  // a.operator-> () 
+       //     and then: depends on return type!
 
 MyClass a;
 OtherClass b; OtherClass c;
