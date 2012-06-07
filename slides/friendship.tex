@@ -1,5 +1,8 @@
 \section{friendship}
 
+
+
+
 \subsection{access modifiers}
 
 \begin{frame}[fragile]{access modifiers}
@@ -18,6 +21,7 @@
 	\end{block}
 \end{frame}
 
+
 \begin{frame}{encapsulation \& information hiding}
 	\begin{itemize}[<+->]
 		\item Faustregel: Alles so weit wie möglich schützen!
@@ -25,6 +29,7 @@
 		\item nur sichere, in sich geschlossene Funktionen public
 	\end{itemize}
 \end{frame}
+
 
 \begin{frame}{friendship}
 	Friendship erlaubt eine feinere Kontrolle über member access:
@@ -38,6 +43,8 @@
 		%\includegraphics[\textwidth]{images/non-friendship}
 	}
 \end{frame}
+
+
 
 
 \subsection{forward declarations}
@@ -62,47 +69,33 @@
 	}
 \end{frame}
 
-\begin{frame}[fragile]{Deklaration und Definition: Beispiele}
-	\footnotesize
-	\begin{lstlisting}[language=C++, basicstyle=\footnotesize, numbers=left, numberstyle=\tiny\color{gray}, tabsize=6, xleftmargin=2em]
-int a; // defines a
-extern const int c = 1; // defines c
-int f(int x) { return x+a; } // defines f and defines x
-struct S { int a; int b; }; // defines S, S::a, and S::b
-struct X { // defines X
-int x; // defines nonstatic data member x
-static int y; // declares static data member y
-X(): x(0) { } // defines a constructor of X
-};
-int X::y = 1; // defines X::y
-enum { up, down }; // defines up and down
-namespace N { int d; } // defines N and N::d
-namespace N1 = N; // defines N1
-X anX; // defines anX
 
-extern int a; // declares a
-extern const int c; // declares c
-int f(int); // declares f
-struct S; // declares S
-typedef int Int; // declares Int
-extern X anotherX; // declares anotherX
-using N::d; // declares N::d
-	\end{lstlisting}
+\begin{frame}{Deklaration und Definition: Beispiele}
+	\onslide*<+>
+		\lstinputlisting[commentstyle=\none]{cpp-code/decl-defn.cpp}
+		
+	\onslide*<+>
+		\lstinputlisting{cpp-code/decl-defn.cpp}
 \end{frame}
 
-\begin{frame}[fragile]{Wozu?}
-	unqualified name lookup (Standard, 3.4.1:4-8)
-	
-	Ein Name benutzt direkt in einem namespace muss zuvor deklariert sein.
-	\begin{lstlisting}[language=C++, basicstyle=\footnotesize, numbers=left, numberstyle=\tiny\color{gray}, tabsize=6, xleftmargin=2em]
-class X { };
-namespace nsp {
-	class Y { };
-	void bar(X x);
-	void bar(Y y);
-}
-	\end{lstlisting}
+
+\begin{frame}[fragile]{forward declarations: Wozu?}
+	\begin{block}{unqualified name lookup (Standard, 3.4.1:4-8)}
+		Ein Name benutzt direkt in einem namespace muss zuvor deklariert sein.
+		
+		\vspace{1em}
+		
+		\begin{lstlisting}
+			class X { };
+			namespace nsp {
+			    class Y { };
+			    void bar(X x);
+			    void bar(Y y);
+			}
+		\end{lstlisting}
+	\end{block}
 \end{frame}
+
 
 \begin{frame}[fragile]{functions}
 	\begin{block}{Voraussetzungen an Funktionen beim Aufruf (Standard, 3.2:3, 3.5:2)}
@@ -117,21 +110,25 @@ namespace nsp {
 			\column{0.4\textwidth}
 			\emph{translation unit 1}
 			\vspace{0.5em}
-			\begin{lstlisting}[language=C++, basicstyle=\footnotesize, numbers=left, numberstyle=\tiny\color{gray}, tabsize=6, xleftmargin=2em]
+			\begin{lstlisting}
 void foo(int i);
 void bar() { foo(42); }
 			\end{lstlisting}
 			
-			\column{0.4\textwidth}
+			\column{0.6\textwidth}
 			\emph{beliebige translation unit}
 			\vspace{0.5em}
-			\begin{lstlisting}[language=C++, basicstyle=\footnotesize, numbers=left, numberstyle=\tiny\color{gray}, tabsize=6, xleftmargin=2em]
+			\begin{lstlisting}
 #include <iostream>
-void foo(int i) { std::cout << i; }
+void foo(int i)
+{
+    std::cout << i;
+}
 			\end{lstlisting}
 		\end{columns}
 	\end{block}
 \end{frame}
+
 
 \begin{frame}[fragile]{Incomplete Types}
 	Eine Klasse, die nur deklariert aber nicht definiert wurde, ist ein \emph{incomplete type}.
@@ -142,31 +139,32 @@ void foo(int i) { std::cout << i; }
 	
 	Bevor man einen Pointer/Referenz nutzt, sollte der type completed sein (definiert). Sonst darf man quasi nichts mit dem Pointer/Referenz tun. Siehe Standard, 3.2:4, 5.2.2:4, 5.3.1:4, 5.7:1, 8.3.5:6
 	
-	\begin{lstlisting}[language=C++, basicstyle=\footnotesize, numbers=left, numberstyle=\tiny\color{gray}, tabsize=6, xleftmargin=2em]
+	\begin{lstlisting}
 		struct X;
 		void foo(X); // alt: void foo(X x);
 		
 		struct X { int m; };
 		void foo(X x)
 		{
-			x.m = 42;
+		    x.m = 42;
 		}
 	\end{lstlisting}
 \end{frame}
 
+
 \begin{frame}[fragile]{classes, types}
 	\begin{block}{Syntax}
 		\begin{columns}[t]
-			\column{0.4\textwidth}
-			\begin{lstlisting}[language=C++, basicstyle=\footnotesize, numbers=left, numberstyle=\tiny\color{gray}, tabsize=6, xleftmargin=2em]
+			\column{0.3\textwidth}
+			\begin{lstlisting}
  class A;
 struct B;
  union C;
   enum D;
 			\end{lstlisting}
 			
-			\column{0.4\textwidth}
-			\begin{lstlisting}[language=C++, basicstyle=\footnotesize, numbers=left, numberstyle=\tiny\color{gray}, tabsize=6, xleftmargin=2em]
+			\column{0.7\textwidth}
+			\begin{lstlisting}
  class A { int m; };
 struct B { void doit(); };
  union C { int m; char c; };
@@ -179,8 +177,9 @@ struct B { void doit(); };
 	
 	Wozu verwenden?
 	\pause
+	
 	Für gegenseitige Abhängigkeiten oder auch information hiding!
-	\begin{lstlisting}[language=C++, basicstyle=\footnotesize, numbers=left, numberstyle=\tiny\color{gray}, tabsize=6, xleftmargin=2em]
+	\begin{lstlisting}
 class A;
 class B;
 class B { A* getA(); };
@@ -189,21 +188,23 @@ class A { void doB(B*); };
 \end{frame}
 
 
+
+
 \subsection{friend}
 
 \begin{frame}[fragile]{Syntax}
-	\begin{lstlisting}[language=C++, basicstyle=\footnotesize, numbers=left, numberstyle=\tiny\color{gray}, tabsize=6, xleftmargin=2em]
+	\begin{lstlisting}
 struct B;
 void globalFunc(B b);
 struct A { void foo(B b); };
 
 struct B {
-	// public, private, protected or nothing at all
-	friend class A;
-	friend void globalFunc();
+    // public, private, protected or nothing at all
+    friend class A;
+    friend void globalFunc();
 private:
-	int m;
-	void doInternal();
+    int m;
+    void doInternal();
 };
 	\end{lstlisting}
 	
@@ -214,6 +215,7 @@ private:
 	\end{block}
 \end{frame}
 
+
 \begin{frame}[fragile]{Wirkung}
 	Siehe Standard, 11.4.
 	Hauptsächlich: man darf in member functions der befreundeten Klasse auf private member der Freundschaft-gewährenden Klasse zugreifen.
@@ -221,32 +223,32 @@ private:
 	\begin{block}{Beispiel}
 		\begin{columns}[t]
 			\column{0.4\textwidth}
-			\begin{lstlisting}[language=C++, basicstyle=\footnotesize, numbers=left, numberstyle=\tiny\color{gray}, tabsize=6, xleftmargin=2em]
+			\begin{lstlisting}
 struct B {
-	// public, private, protected or nothing at all
-	friend class A;
-	friend void globalFunc();
+    friend class A;
+    friend void globalFunc();
 private:
-	int m;
-	void doInternal();
+    int m;
+    void doInternal();
 };
 			\end{lstlisting}
 			
 			\column{0.4\textwidth}
-			\begin{lstlisting}[language=C++, basicstyle=\footnotesize, numbers=left, numberstyle=\tiny\color{gray}, tabsize=6, xleftmargin=2em]
+			\begin{lstlisting}
 void globalFunc(B b)
 {
-	b.doInternal();
+    b.doInternal();
 }
 void A::foo(B b)
 {
-	b.m = 42;
-	b.doInternal();
+    b.m = 42;
+    b.doInternal();
 }
 			\end{lstlisting}
 		\end{columns}
 	\end{block}
 \end{frame}
+
 
 \begin{frame}{Hinweise}
 	\begin{itemize}[<+->]

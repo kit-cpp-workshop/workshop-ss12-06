@@ -1,0 +1,196 @@
+\section {Operatoren}
+
+\subsection{Arten von Operatoren}
+
+%\newcommand{\nov}[1]{\alert{#1}}
+\newcommand{\cppop}[1]{ \texttt{#1} }
+\newcommand{\pppp}{}
+
+
+\begin{frame}[fragile]{Alle Operatoren in C++}
+	\begin{block}{Alle Operatoren in C++}
+		\begin{tabular}{r|l}
+			memory			&	\verb|* & new new[] delete delete[]| \verb|sizeof|					\pause \\
+			arithmetic		&	\verb!+ - * / % ^ & | ~ << >>!									\pause \\
+			logic			&	\verb!&& ||! \verb|!|											\pause \\
+			comparison		&	\verb|< > <= >= == !=|											\pause \\
+			assignment		&	\verb!= += -= *= /= %= ^= &= |= >>= <<= ++ --!					\pause \\
+			others			&	\verb|() [] ,|~~\verb|::|~~\verb|?:| \verb|typeid|				\pause \\
+			member access	&	\verb|->* ->|~~\verb|.|~~\verb|.*|								\pause \\
+		\end{tabular}
+	\end{block}
+	
+	\vspace{2em}
+	
+	\onslide<+->
+		42 overloadable operators + 4 unary forms
+		
+		Nicht überladbar: \verb|sizeof typeid . .* :: ?:|
+\end{frame}
+
+
+\begin{frame}[fragile]{Gruppiert nach Parameterzahl}
+	\onslide<+->
+		\begin{block}{Unäre Operatoren}
+			\verb|! ++ --|~~sowie die unären Varianten von~~\verb|+ - * &|
+		\end{block}
+	
+	\vspace{2em}
+	
+	\onslide<+->
+		\begin{block}{Binäre Operatoren}
+			(alle anderen)
+		\end{block}
+	
+	\vspace{2em}
+	
+	\onslide<+->
+		\begin{block}{Ternärer Operator}
+			\verb|?:|
+		\end{block}
+\end{frame}
+
+
+
+
+\subsection{Aufruf von Operatoren}
+
+\begin{frame}[fragile]{Unäre Operatoren}
+	\begin{block}{operator function invocation}
+		For operator \cppop{@} and expression \cppop{a}:
+		
+		\vspace{1em}
+		
+		\begin{tabular}{l|l|l}
+			expression	&	as member function	& as (global) function	\\
+			\hline
+			\cppop{@a}	&	\cppop{(a).operator@ ()}	&	\cppop{operator@ (a)}	\pause \\
+			\cppop{a@}	&	\cppop{(a).operator@ (0)}	&	\cppop{operator@ (a, 0)}	\pause \\
+			\cppop{a-\textgreater}	&	\cppop{(a).operator-\textgreater ()}	&	n/a \pause \\
+		\end{tabular}
+	\end{block}
+	
+	\vspace{1em}
+	
+	\onslide<+->
+		\lstinputlisting[linerange={1-5}]{cpp-code/operator-invocation.cpp}
+\end{frame}
+
+
+\begin{frame}[fragile]{Binäre Operatoren}
+	\begin{block}{operator function invocation}
+		For operator \cppop{@} and expression \cppop{a}:
+		
+		\vspace{1em}
+		
+		\begin{tabular}{l|l|l}
+			expression	&	as member function	& as (global) function	\\
+			\hline
+			\cppop{a@b}	&	\cppop{(a).operator@ (b)}	&	\cppop{operator@ (a, b)}	\pause \\
+			\cppop{a=b}	&	\cppop{(a).operator= (b)}	&	n/a \pause \\
+			\cppop{a[b]}	&	\cppop{(a).operator[] (b)}	&	n/a \pause \\
+		\end{tabular}
+	\end{block}
+	
+	\vspace{1em}
+	
+	\onslide<+->
+		\lstinputlisting[linerange={7-11}]{cpp-code/operator-invocation.cpp}
+\end{frame}
+
+
+
+
+\subsection{Zweck von Operator-Überladung}
+
+\begin{frame}[fragile]{Wozu Operator-Überladung?}
+	\begin{itemize}[<+->]
+		\item intuitive Syntax z.B. für Matrizen \verb|A * B + C|
+		\item Hinteranderausführen, etwa \verb|a + b + c| statt \verb|add(add(a, b), c)| oder \verb|a.add(b).add(c)|
+		\item Syntax-Kompatibilität (z.B. Pointer und Smart-Pointer)
+		\item Spezialfälle: address-of \cppop{\&} und class member access \cppop{-\textgreater} und assigment \cppop{=}
+	\end{itemize}
+\end{frame}
+
+
+
+
+\subsection{Syntax}
+
+\begin{frame}[fragile, b]{Einfache binäre Operatoren}
+	\onslide*<+>
+	{
+		\begin{block}{\cppop{a.operator@ (b)}}
+			\lstinputlisting[linerange={2-10}]{cpp-code/overloading-binary-operators.cpp}
+		\end{block}
+	}
+	
+	\onslide*<+>
+	{
+		Non-assigment operators und kein []
+		
+		\begin{block}{\cppop{operator@ (a, b)}}
+			\lstinputlisting[linerange={14-22}]{cpp-code/overloading-binary-operators.cpp}
+		\end{block}
+	}
+	
+	\vspace{3em}
+\end{frame}
+
+
+\begin{frame}[fragile, b]{Binary assignment operators}
+	\onslide*<+>
+	{
+		\begin{block}{a.operator@ (b)}
+			\lstinputlisting[linerange={27-38}]{cpp-code/overloading-binary-operators.cpp}
+		\end{block}
+	}
+	
+	\onslide*<+>
+	{
+		Kein []
+		
+		\begin{block}{operator@ (a, b)}
+			\lstinputlisting[linerange={42-53}]{cpp-code/overloading-binary-operators.cpp}
+		\end{block}
+	}
+	
+	\vspace{1em}
+\end{frame}
+
+
+\begin{frame}{Unäre Operatoren: Präfix}
+	Non-assignment operators
+	
+	\onslide*<+>
+	{
+		\begin{block}{a.operator@ ()}
+			\lstinputlisting[linerange={2-9}]{cpp-code/overloading-unary-operators.cpp}
+		\end{block}
+	}
+	
+	\onslide*<+>
+	{
+		\begin{block}{operator@ (a)}
+			\lstinputlisting[linerange={13-20}]{cpp-code/overloading-unary-operators.cpp}
+		\end{block}
+	}
+\end{frame}
+
+\begin{frame}[fragile]{Unäre Operatoren: Suffix}
+	Die einzigen unären Suffix-Operatoren sind \verb!++! und \verb!--!, also assigment-ops.
+	
+	\onslide*<+>
+	{
+		\begin{block}{a.operator@ (0)}
+			\lstinputlisting[linerange={25-36}]{cpp-code/overloading-unary-operators.cpp}
+		\end{block}
+	}
+	
+	\onslide*<+>
+	{
+		\begin{block}{operator@ (a)}
+			\lstinputlisting[linerange={40-51}]{cpp-code/overloading-unary-operators.cpp}
+		\end{block}
+	}
+\end{frame}
