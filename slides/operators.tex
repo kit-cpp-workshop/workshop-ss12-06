@@ -219,10 +219,12 @@
 		using namespace std;
 		extern ostream cout;	// definition of the cout object according to 27.3
 		
-		MyClass p { /* ... */ };
-		
+		class MyClass { /* ... */ };
 		std::ostream& operator <<(ostream& o, MyClass p)
 		{ /* ... */ return o;}
+		
+		MyClass p;
+		cout << p;	// calls: operator <<(cout, p)
 	\end{lstlisting}
 \end{frame}
 
