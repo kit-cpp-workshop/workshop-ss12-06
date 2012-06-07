@@ -28,24 +28,6 @@
 \end{frame}
 
 
-\begin{frame}[fragile]{forward declarations: Wozu?}
-	\begin{block}{unqualified name lookup (Standard, 3.4.1:4-8)}
-		Ein Name benutzt direkt in einem namespace muss zuvor deklariert sein.
-		
-		\vspace{1em}
-		
-		\begin{lstlisting}
-			class X { };
-			namespace nsp {
-			    class Y { };
-			    void bar(X x);
-			    void bar(Y y);
-			}
-		\end{lstlisting}
-	\end{block}
-\end{frame}
-
-
 \begin{frame}[fragile]{functions}
 	\begin{block}{Voraussetzungen an Funktionen beim Aufruf (Standard, 3.2:3, 3.5:2)}
 		\begin{itemize}
