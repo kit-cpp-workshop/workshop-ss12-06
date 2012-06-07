@@ -89,6 +89,7 @@
 			\cppop{a@b}	&	\cppop{(a).operator@ (b)}	&	\cppop{operator@ (a, b)}	\pause \\
 			\cppop{a=b}	&	\cppop{(a).operator= (b)}	&	n/a \pause \\
 			\cppop{a[b]}	&	\cppop{(a).operator[] (b)}	&	n/a \pause \\
+			\cppop{a(b)}	&	\cppop{(a).operator() (b)}	&	n/a \pause \\
 		\end{tabular}
 	\end{block}
 	
@@ -148,7 +149,7 @@
 	
 	\onslide*<+>
 	{
-		Kein []
+		Kein \cppop{[]} und kein \cppop{()}
 		
 		\begin{block}{operator@ (a, b)}
 			\lstinputlisting[linerange={42-53}]{cpp-code/overloading-binary-operators.cpp}
@@ -160,10 +161,10 @@
 
 
 \begin{frame}{Unäre Operatoren: Präfix}
-	Non-assignment operators
-	
 	\onslide*<+>
 	{
+		Non-assignment operators
+		
 		\begin{block}{a.operator@ ()}
 			\lstinputlisting[linerange={2-9}]{cpp-code/overloading-unary-operators.cpp}
 		\end{block}
@@ -171,6 +172,8 @@
 	
 	\onslide*<+>
 	{
+		Non-assignment operators, kein -\textgreater
+		
 		\begin{block}{operator@ (a)}
 			\lstinputlisting[linerange={13-20}]{cpp-code/overloading-unary-operators.cpp}
 		\end{block}
@@ -193,4 +196,87 @@
 			\lstinputlisting[linerange={40-51}]{cpp-code/overloading-unary-operators.cpp}
 		\end{block}
 	}
+\end{frame}
+
+
+
+
+\subsection{member functions oder non-member functions?}
+
+\begin{frame}[fragile]{Fälle ohne Wahlmöglichkeit}
+	Bei diesen Operatoren gibt es nur die member-function-Variante: \verb!= [] () ->!
+	
+	\pause
+	\vspace{1em}
+	
+	Bei allen anderen Operatoren hat man die Wahl.
+	
+	Einschränkung: operator function invocation
+	\begin{lstlisting}
+		#include <ostream>
+		#include <iostream>
+		
+		using namespace std;
+		extern ostream cout;	// definition of the cout object according to 27.3
+		
+		MyClass p { /* ... */ };
+		
+		std::ostream& operator <<(ostream& o, MyClass p)
+		{ /* ... */ return o;}
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Fälle mit Wahlmöglichkeit}
+	Habe keine guten Entscheidungshilfen gefunden!
+	
+	\vspace{1em}
+	
+	Bemerkung:\\
+	Zwecks Symmetrie nimmt man meist die Variante mit der non-member function:
+	\begin{lstlisting}
+		class MyInt;
+		MyInt operator+ (MyInt, int);
+		MyInt operator+ (int, MyInt);
+		
+		class MyInt {
+		    friend MyInt operator+ (MyInt, int);
+		    // MyInt operator +(MyInt int);
+		    friend MyInt operator+ (int, MyInt);
+		    // n/a
+		    
+		private:
+		    int m;
+		};
+	\end{lstlisting}
+\end{frame}
+
+
+
+
+\subsection{Wichtige Hinweise}
+
+\begin{frame}[fragile]{Self-assignment}
+	\onslide*<+>
+	{
+		\lstinputlisting[linerange={1-14, 32-34}]{cpp-code/self-assignment.cpp}
+	}
+		
+	\onslide*<+>
+	{
+		\lstinputlisting[linerange={17-30, 32-34}]{cpp-code/self-assignment.cpp}
+	}
+\end{frame}
+
+\begin{frame}[fragile]{Weitere Hinweise}
+	\url{http://www.parashift.com/c++-faq-lite/operator-overloading.html#faq-13.9}
+	
+	\vspace{2em}
+	
+	\begin{itemize}[<+->]
+		\item operator overloading ist nicht dafür da, dem class designer das Leben einfacher zu machen, sondern dem Nutzer einer Klasse!
+		\item Operatoren sollten intuitive und eindeutige Bedeutung haben
+		\item Identitäten sollten erhalten bleiben, z.B. \verb|x == x + y - y|
+		\item manche Operatoren sollten den ersten Operanden verändern, z.B. \verb|= += *=|
+		\item manche aber eben nicht, z.B. \verb|+ * /|
+	\end{itemize}
 \end{frame}
