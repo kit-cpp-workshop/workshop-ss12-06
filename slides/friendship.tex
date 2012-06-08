@@ -59,8 +59,8 @@ struct A { void foo(B b); };
 
 struct B {
     // public, private, protected or nothing at all
-    friend class A;
-    friend void globalFunc();
+    friend struct A;
+    friend void globalFunc(B);
 private:
     int m;
     void doInternal();
@@ -84,8 +84,8 @@ private:
 			\column{0.55\textwidth}
 			\begin{lstlisting}
 struct B {
-    friend class A;
-    friend void globalFunc();
+    friend struct A;
+    friend void globalFunc(B);
 private:
     int m;
     void doInternal();
@@ -113,5 +113,6 @@ void A::foo(B b)
 	\begin{itemize}
 		\item Friendship wird nicht vererbt!
 		\item Friendship ist nicht transitiv!
+		\item Friendship ist nicht symmetrisch!
 	\end{itemize}
 \end{frame}
