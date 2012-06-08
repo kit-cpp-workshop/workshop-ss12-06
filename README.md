@@ -31,7 +31,7 @@ Mit operator overloading kann man für eigene Klassen Operatoren definieren, etw
 
 ### Folien zum Vortrag
 
-Die Vortragsfolien stehen als [PDF](URL) zum Download bereit. Außerdem liegt der LaTeX-Quellcode zu den Folien im Ordner `slides`.
+Die Vortragsfolien stehen als [PDF](https://github.com/downloads/kit-cpp-workshop/workshop-ss12-06/slides.pdf) zum Download bereit. Außerdem liegt der LaTeX-Quellcode zu den Folien im Ordner `slides`.
 
 ###Screencast
 
