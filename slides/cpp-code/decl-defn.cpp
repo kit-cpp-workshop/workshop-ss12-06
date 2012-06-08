@@ -1,6 +1,6 @@
 struct X {                   // defines X
 	int x;                   // defines data member x
-	X(): x(0) { }            // defines a constructor of X
+	X(): x(0) { }            // defines a ctor of X
 };
 int f(int x) { return x+a; } // defines f and defines x
 struct S;                    // declares S
