@@ -11,10 +11,11 @@
 	Wenn man sagt, eine Klasse habe Zugriff auf einen member, so bedeutet dies, dass die member dieser Klasse diesen Zugriff besitzten (z.B. member functions).
 	
 	\pause
+	\hspace{1em}
 	
 	\begin{block}{Zugriffskontrolle für member}
 		Zugriff für member in einer Klasse A für:
-		\begin{itemize}[<+->]
+		\begin{itemize}
 			\item \verb|public| -- jeden
 			\item \verb|protected| -- nur die Klasse A selbst und deren Kindklassen
 			\item \verb|private| -- nur die Klasse A selbst
@@ -24,7 +25,7 @@
 
 
 \begin{frame}{encapsulation \& information hiding}
-	\begin{itemize}[<+->]
+	\begin{itemize}
 		\item Faustregel: Alles so weit wie möglich schützen!
 		\item data member i.d.R. private
 		\item nur sichere, in sich geschlossene Funktionen public
@@ -76,7 +77,7 @@ private:
 
 \begin{frame}[fragile]{Wirkung}
 	Siehe Standard, 11.4.
-	Hauptsächlich: man darf in member functions der befreundeten Klasse auf private member der Freundschaft-gewährenden Klasse zugreifen.
+	Hauptsächlich: man darf in member functions der befreundeten Klasse auf private und protected member der Freundschaft-gewährenden Klasse zugreifen.
 	
 	\begin{block}{Beispiel}
 		\begin{columns}[t]
@@ -109,7 +110,7 @@ void A::foo(B b)
 
 
 \begin{frame}{Hinweise}
-	\begin{itemize}[<+->]
+	\begin{itemize}
 		\item Friendship wird nicht vererbt!
 		\item Friendship ist nicht transitiv!
 	\end{itemize}
