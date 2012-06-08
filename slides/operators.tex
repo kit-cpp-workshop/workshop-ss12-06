@@ -105,11 +105,19 @@
 \subsection{Zweck von Operator-Überladung}
 
 \begin{frame}[fragile]{Wozu Operator-Überladung?}
-	\begin{itemize}[<+->]
+	\begin{itemize}
 		\item intuitive Syntax z.B. für Matrizen \verb|A * B + C|
+		\pause
 		\item Hinteranderausführen, etwa \verb|a + b + c| statt \verb|add(add(a, b), c)| oder \verb|a.add(b).add(c)|
+		\pause
 		\item Syntax-Kompatibilität (z.B. Pointer und Smart-Pointer)
-		\item Spezialfälle: address-of \cppop{\&} und class member access \cppop{-\textgreater} und assigment \cppop{=}
+		\pause
+		\item Spezialfälle
+		\begin{itemize}
+			\item address-of \cppop{\&}
+			\item class member access \cppop{-\textgreater} 
+			\item assigment \cppop{=}
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -204,10 +212,10 @@
 \subsection{member functions oder non-member functions?}
 
 \begin{frame}[fragile]{Fälle ohne Wahlmöglichkeit}
-	Bei diesen Operatoren gibt es nur die member-function-Variante: \verb!= [] () ->!
+	Nur als member-function-Variante: \verb!= [] () ->!
 	
-	\pause
 	\vspace{1em}
+	\pause
 	
 	Bei allen anderen Operatoren hat man die Wahl.
 	
@@ -217,7 +225,8 @@
 		#include <iostream>
 		
 		using namespace std;
-		extern ostream cout;	// definition of the cout object according to 27.3
+		// definition of the cout object according to 27.3
+		extern ostream cout;
 		
 		class MyClass { /* ... */ };
 		std::ostream& operator <<(ostream& o, MyClass p)
