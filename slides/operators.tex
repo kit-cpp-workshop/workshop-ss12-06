@@ -64,9 +64,9 @@
 		\begin{tabular}{l|l|l}
 			expression	&	as member function	& as (global) function	\\
 			\hline
-			\cppop{@a}	&	\cppop{(a).operator@ ()}	&	\cppop{operator@ (a)}	\pause \\
-			\cppop{a@}	&	\cppop{(a).operator@ (0)}	&	\cppop{operator@ (a, 0)}	\pause \\
-			\cppop{a-\textgreater}	&	\cppop{(a).operator-\textgreater ()}	&	n/a \pause \\
+			\cppop{@a}	&	\cppop{(a).operator@ ()}	&	\cppop{operator@ (a)}	\\
+			\cppop{a@}	&	\cppop{(a).operator@ (0)}	&	\cppop{operator@ (a, 0)}	\\
+			\cppop{a-\textgreater}	&	\cppop{(a).operator-\textgreater ()}	&	n/a \\
 		\end{tabular}
 	\end{block}
 	
@@ -86,10 +86,10 @@
 		\begin{tabular}{l|l|l}
 			expression	&	as member function	& as (global) function	\\
 			\hline
-			\cppop{a@b}	&	\cppop{(a).operator@ (b)}	&	\cppop{operator@ (a, b)}	\pause \\
-			\cppop{a=b}	&	\cppop{(a).operator= (b)}	&	n/a \pause \\
-			\cppop{a[b]}	&	\cppop{(a).operator[] (b)}	&	n/a \pause \\
-			\cppop{a(b)}	&	\cppop{(a).operator() (b)}	&	n/a \pause \\
+			\cppop{a@b}	&	\cppop{(a).operator@ (b)}	&	\cppop{operator@ (a, b)}	\\
+			\cppop{a=b}	&	\cppop{(a).operator= (b)}	&	n/a \\
+			\cppop{a[b]}	&	\cppop{(a).operator[] (b)}	&	n/a \\
+			\cppop{a(b)}	&	\cppop{(a).operator() (b)}	&	n/a \\
 		\end{tabular}
 	\end{block}
 	
@@ -150,7 +150,7 @@
 \begin{frame}[fragile, b]{Binary assignment operators}
 	\onslide*<+>
 	{
-		\begin{block}{a.operator@ (b)}
+		\begin{block}{\cppop{a.operator@ (b)}}
 			\lstinputlisting[linerange={27-38}]{cpp-code/overloading-binary-operators.cpp}
 		\end{block}
 	}
@@ -159,7 +159,7 @@
 	{
 		Kein \cppop{[]} und kein \cppop{()}
 		
-		\begin{block}{operator@ (a, b)}
+		\begin{block}{\cppop{operator@ (a, b)}}
 			\lstinputlisting[linerange={42-53}]{cpp-code/overloading-binary-operators.cpp}
 		\end{block}
 	}
@@ -173,7 +173,7 @@
 	{
 		Non-assignment operators
 		
-		\begin{block}{a.operator@ ()}
+		\begin{block}{\cppop{a.operator@ ()}}
 			\lstinputlisting[linerange={2-9}]{cpp-code/overloading-unary-operators.cpp}
 		\end{block}
 	}
@@ -182,7 +182,7 @@
 	{
 		Non-assignment operators, kein -\textgreater
 		
-		\begin{block}{operator@ (a)}
+		\begin{block}{\cppop{operator@ (a)}}
 			\lstinputlisting[linerange={13-20}]{cpp-code/overloading-unary-operators.cpp}
 		\end{block}
 	}
@@ -193,14 +193,14 @@
 	
 	\onslide*<+>
 	{
-		\begin{block}{a.operator@ (0)}
+		\begin{block}{\cppop{a.operator@ (0)}}
 			\lstinputlisting[linerange={25-36}]{cpp-code/overloading-unary-operators.cpp}
 		\end{block}
 	}
 	
 	\onslide*<+>
 	{
-		\begin{block}{operator@ (a)}
+		\begin{block}{\cppop{operator@ (a)}}
 			\lstinputlisting[linerange={40-51}]{cpp-code/overloading-unary-operators.cpp}
 		\end{block}
 	}
@@ -212,7 +212,7 @@
 \subsection{member functions oder non-member functions?}
 
 \begin{frame}[fragile]{Fälle ohne Wahlmöglichkeit}
-	Nur als member-function-Variante: \verb!= [] () ->!
+	Nur als member-function-Variante:~~\verb!= [] () ->!
 	
 	\vspace{1em}
 	\pause
