@@ -2,13 +2,13 @@
 
 \begin{frame}[fragile]{Deklaration und Definition}
 	\begin{block}{Standard, 3.1}
-		Eine Deklaration führt einen Namen ein (in eine translation unit).
+		Eine Deklaration führt einen Namen ein (in eine translation unit).\\
 		Eine Deklaration ist zugleich eine Definition, außer:
 		\begin{itemize}
-			\item Bei Funktionen/Klassen: Fehlendem Rumpf \\
+			\item bei Funktionen/Klassen: fehlendem Rumpf \\
 				{\tiny (Rumpf: das zwischen den geschweiften Klammern) }
-			\item bei Variablen mit angegebenem linkage-specifier \verb|extern|
-			\item Bei static member Variablen ohne initialisierung
+			\item bei Variablen mit angegebenem linkage-specifier \verb|extern| und ohne Initialisierung
+			\item bei static member Variablen
 		\end{itemize}
 	\end{block}
 	
@@ -24,7 +24,13 @@
 
 \begin{frame}{Deklaration und Definition: Beispiele}
 	\onslide*<+>
-		\lstinputlisting[basicstyle=\ttfamily \tiny]{cpp-code/decl-defn.cpp}
+	{
+		\lstinputlisting[commentstyle=\none]{cpp-code/decl-defn.cpp}
+	}
+	\onslide*<+>
+	{
+		\lstinputlisting{cpp-code/decl-defn.cpp}
+	}
 \end{frame}
 
 
@@ -37,13 +43,17 @@
 	\end{block}
 	
 	\begin{block}{Syntax}
+		\hspace{1em}
 		\begin{columns}[t]
 			\column{0.5\textwidth}
 				\emph{\ translation unit 1}
 				\vspace{0.5em}
 			\begin{lstlisting}
 void foo(int i);
-void bar() { foo(42); }
+void bar()
+{
+    foo(42);
+}
 			\end{lstlisting}
 			
 			\column{0.5\textwidth}
@@ -72,12 +82,14 @@ void foo(int i)
 		\item »Dinge« mit incomplete type anlegen: verboten
 		\item Referenzen und Pointer auf incomplete types: erlaubt
 		\begin{itemize}
-			\item Pointer auf einen incomplete type sind modifizierbar
+			\item Pointer auf einen incomplete type sind modifizierbar (Zuweisung)
 			\item \dots aber nicht dereferenzierbar
 		\end{itemize}
 	\end{itemize}
 	
 	\tiny{Standard, 3.2:4, 5.2.2:4, 5.3.1:4, 5.7:1, 8.3.5:6}
+	
+	\pause
 	
 	\begin{lstlisting}
 		struct X;
@@ -114,6 +126,7 @@ struct B { void doit(); };
 	\end{block}
 	
 	\pause
+	\vspace{1em}
 	
 	Wozu verwenden?
 	\pause
