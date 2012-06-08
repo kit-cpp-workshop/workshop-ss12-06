@@ -6,7 +6,9 @@ struct MyStruct {
 	
 	MyStruct& operator= (MyStruct& p) {
 		this->m = p.m;
+		delete p.m;
 		p.m = 0;
+		
 		
 		
 		return *this;
@@ -21,9 +23,11 @@ struct MyStruct {
 	~MyStruct() { delete m; }
 	
 	MyStruct& operator= (MyStruct& p) {
-		int* temp = p.m;
-		p.m = 0;
-		this->m = temp;
+		if(p.m != this->m) {
+			this->m = p.m;
+			delete p.m;
+			p.m = 0;
+		}
 		
 		return *this;
 	}
