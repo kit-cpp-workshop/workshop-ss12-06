@@ -7,6 +7,6 @@ a->m;  // a.operator-> ()
 
 MyClass a;
 OtherClass b; OtherClass c;
-a + b;    // a.operator+ (b) OR operator++ (a, b)
+a + b;    // a.operator+ (b) OR operator+ (a, b)
 a[b];     // a.operator[] (b)
 a(b, c);  // a.operator() (b, c)
