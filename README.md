@@ -33,9 +33,14 @@ Mit operator overloading kann man für eigene Klassen Operatoren definieren, etw
 
 Die Vortragsfolien stehen als [PDF](https://github.com/downloads/kit-cpp-workshop/workshop-ss12-06/slides.pdf) zum Download bereit. Außerdem liegt der LaTeX-Quellcode zu den Folien im Ordner `slides`.
 
-###Screencast
+### Screencast
 
-Ein Screencast des Vortrags wird nach dem Workshop an dieser Stelle verlinkt.
+Eine Aufzeichnung des Vortrages steht zum [Download](http://ubuntuone.com/3kKIzPBzAHqbD409QFyFkE) bereit.
+
+ * ab 00:00 Intro/Begrüßung
+ * ab 01:09 forward declarations
+ * ab 06:15 friendship
+ * ab 12:24 operator overloading
 
 ## Aufgaben
 
