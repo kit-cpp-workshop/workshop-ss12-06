@@ -35,7 +35,7 @@ Die Vortragsfolien stehen als [PDF](kit-cpp-workshop.github.com/raw/downloads/wo
 
 ### Screencast
 
-Eine Aufzeichnung des Vortrages steht zum [Download](http://ubuntuone.com/3kKIzPBzAHqbD409QFyFkE) bereit.
+Eine Aufzeichnung des Vortrages steht zum [Download](https://drive.google.com/file/d/0B18AwdjM48imLTVTcmFIZElmY3M/edit?usp=sharing) bereit.
 
  * ab 00:00 Intro/Begrüßung
  * ab 01:09 forward declarations
